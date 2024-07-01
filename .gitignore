@@ -1,0 +1,44 @@
+# Entornos virtuales
+venv/
+env/
+
+# Archivos y directorios de Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+
+# Archivos de configuración y datos sensibles
+instance/
+config.py
+.env
+
+# Archivos de bases de datos
+*.db
+*.sqlite
+
+# Archivos de log
+*.log
+
+# Archivos de distribución
+dist/
+build/
+*.egg-info/
+
+# IDEs y editores
+.vscode/
+.idea/
+*.swp
+
+# Archivos de sistemas operativos
+.DS_Store
+Thumbs.db
+
+# Archivos temporales
+*.tmp
+*.bak
+*.old
+
+# Archivos de caché de Flask
+flask_session/
