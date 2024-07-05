@@ -15,7 +15,7 @@ buffer = b''
 
 def parse_rfid_data(data):
     # Asumimos que una trama válida comienza con \xe0\xf8 y termina con \x7e
-    start_marker = b'\xe0\xf8'
+    start_marker = b'\x00~'
     end_marker = b'\x7e'
 
     if start_marker in data and end_marker in data:
