@@ -14,13 +14,12 @@ print('Place tag near the RFID Module')
 buffer = b''
 
 def parse_rfid_data(data):
-    # Asumimos que una trama válida comienza con \xe0\xf8 y termina con \x7e
-    start_marker = b'\x00~'
-    end_marker = b'\x7e'
+    start_marker = b'~'
+    ## end_marker = b'~'
 
-    if start_marker in data and end_marker in data:
+    if start_marker in data:
         start_index = data.index(start_marker)
-        end_index = data.index(end_marker) + len(end_marker)
+        end_index = len(data)
         if start_index < end_index:
             return data[start_index:end_index].hex()
     return None
