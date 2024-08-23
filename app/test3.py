@@ -12,10 +12,12 @@ except serial.SerialException as e:
 print('Place tag near the RFID Module')
 
 buffer = b''
+tag_counter = 0
+tag_ids = {}
 
 def parse_rfid_data(data):
     start_marker = b'\x18\x18\x00~'
-    ## end_marker = b'~'
+    # end_marker = b'~'
 
     if start_marker in data:
         start_index = data.index(start_marker)
@@ -23,6 +25,16 @@ def parse_rfid_data(data):
         if start_index < end_index:
             return data[start_index:end_index].hex()
     return None
+
+def assign_unique_ids(tag_id):
+    global tag_counter
+    if tag_id not in tag_ids:
+        tag_counter += 1
+        unique_id = f'TAG-{tag_counter:04d}'
+        tag_ids[tag_id] = unique_id
+        print(f'Assigned Unique ID: {unique_id} to Tag ID: {tag_id}')
+    else:
+        print(f'Tag ID: {tag_id} already has Unique ID: {tag_ids[tag_id]}')
 
 while True:
     try:
@@ -32,6 +44,7 @@ while True:
             tag_id = parse_rfid_data(buffer)
             if tag_id:
                 print('Parsed RFID Tag ID:', tag_id)
+                assign_unique_ids(tag_id)
                 buffer = b''  # Limpiar el buffer después de una lectura exitosa
             else:
                 print('Failed to parse RFID data.')
@@ -43,9 +56,3 @@ while True:
     except Exception as e:
         print(f"Unexpected error: {e}")
     time.sleep(0.1)
-
-
-
-
-
-
